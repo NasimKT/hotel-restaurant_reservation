@@ -18,7 +18,7 @@
 
 <body>
     <div class="container">
-        <form class="well form-horizontal" action="registrations.php" method="post" id="contact_form">
+        <form class="well form-horizontal" action="registrations.php" method="post" id="contact_form" enctype="multipart/form-data">
             <fieldset>
 
                 <!-- Form Name -->
@@ -56,7 +56,7 @@
                     <div class="col-md-4 inputGroupContainer">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
-                            <input name="image" class="form-control" type="file">
+                            <input name="image" placeholder="Image" class="form-control" type="file">
                         </div>
                     </div>
                 </div>

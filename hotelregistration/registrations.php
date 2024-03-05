@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include("../db.php"); 
+    include("../db.php");
 
     $name = mysqli_real_escape_string($conn, $_POST['name']);
     $about = mysqli_real_escape_string($conn, $_POST['about']);
@@ -29,12 +29,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Move the uploaded file to the specified directory
                     $imageData = $_FILES['image']['name'];
                     move_uploaded_file($_FILES['image']['tmp_name'], '../uploads/' . $imageData);
-                    $sql = "INSERT INTO hotel (name, about, image, mail, phone, seating_capacity, table_count, menu)
-                            VALUES ('$name', '$about', '$uploaded_file_name', '$mail', '$phone', '$seating_capacity', '$table_count', '$menu')";
+                    $sql = "INSERT INTO hotel (name, about, image, mail, phone, room, food)
+                            VALUES ('$name', '$about', '$uploaded_file_name', '$mail', '$phone', '$room_count', $food_facility)";
                     if (mysqli_query($conn, $sql)) {
-                        echo "Records inserted successfully.";
+                        echo "<div style='text-align: center; padding: 20px; background-color: #f0f0f0; border: radius 20px; margin-top: 20px;'>";
+                        echo "<h2 style='color: green;'>Registration Successful!</h2>";
+
+                        echo "<div id='countdown' style='font-size: 24px; color: #333; margin-top: 20px;'></div>";
+
+                        echo "</div>";
+
+                        echo "<script>
+                                var countdown = 5; // Countdown time in seconds
+                    
+                                function updateCountdown() {
+                                    document.getElementById('countdown').innerHTML = 'Redirecting in ' + countdown + ' seconds';
+                                    if (countdown > 0) {
+                                        countdown--;
+                                        setTimeout(updateCountdown, 1000);
+                                    } else {
+                                        window.location.href = '../index.php'; 
+                                    }
+                                }
+                    
+                                updateCountdown();
+                            </script>";
                     } else {
-                        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                        echo "<div style='text-align: center; padding: 20px; background-color: #f0f0f0; margin-top: 20px;'>";
+                        echo "<h2 style='color: red;'>Error: " . $stmt->error . "</h2>";
+                        echo "</div>";
                     }
                 } else {
                     echo "Sorry, only JPG, JPEG, PNG, and GIF files are allowed.";
@@ -48,4 +71,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Close the database connection
     mysqli_close($conn);
 }
-?>

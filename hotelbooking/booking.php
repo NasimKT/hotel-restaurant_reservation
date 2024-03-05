@@ -119,6 +119,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "select name from hotel where id=$hotel_id";
         $result = mysqli_query($conn,$sql);
         $row = mysqli_fetch_assoc($result);
+        echo '<head>
+        <style>
+            .home-btn {
+                background-color: #4CAF50;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                border-radius: 10px;
+                transition: background-color 0.3s ease;
+            }
+
+            .home-btn:hover {
+                background-color: #ffa049;
+            }
+        </style>
+        </head>';
         echo '<div style="background: linear-gradient(to right, #ff7e5f, #feb47b); padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);">';
         echo '<h2 style="color: #fff; text-align: center; font-size: 24px; margin-bottom: 20px;">Thanks for booking with us!</h2>';
         echo "<p style='color: #fff; text-align: center; font-size: 18px;'>We've reserved a room at ".$row["name"].", room number: $room. Your booking id is $id. Please show this id at the reception to get your room.</p>";
