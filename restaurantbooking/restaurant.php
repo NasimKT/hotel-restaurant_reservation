@@ -37,7 +37,7 @@
                 <?php
                     include '../db.php';
 
-                    $query = "SELECT id, name FROM restaurant";
+                    $query = "SELECT id, name FROM restaurant where verified = 1";
                     $result = mysqli_query($conn, $query);
 
                     // Check if query was successful

@@ -163,7 +163,7 @@
     </div>
     <?php
     include("db.php");
-    $query = "SELECT * FROM hotel";
+    $query = "SELECT * FROM hotel where verified = 1";
     $result = mysqli_query($conn, $query);
     if ($result) {
         while ($row = mysqli_fetch_assoc($result)) {
