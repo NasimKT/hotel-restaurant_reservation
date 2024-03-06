@@ -66,7 +66,7 @@
                                                 }
                                                 else{
                                                     echo '
-                                                    <li><a style="text-decoration: none;" href="blog.php">Restaurant</li></a>
+                                                    <li><a style="text-decoration: none;" href="table.php">Restaurant</li></a>
                                                     <li><a style="text-decoration: none;" href="rooms.php">Hotel</li></a>
                                                     <li><a href="logout.php" style="text-decoration: none; font-size:17pt; color:red;">Logout</a></li>
                                                     ';
@@ -83,32 +83,6 @@
                                     <img src="img/360_F_568383056_PDGaD3j4QFS0OYuFocHb0tdHwNe2jhrJ-removebg-preview.png" alt="" style="width: 100px; height: auto;">
 
                                 </a>
-                            </div>
-                        </div>
-                        <div class="col-xl-5 col-lg-4 d-none d-lg-block">
-                            <div class="book_room">
-                                <div class="socail_links">
-                                    <ul>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-facebook-square"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-twitter"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-instagram"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="book_btn d-none d-lg-block">
-                                    <a class="popup-with-form" href="#test-form">Book A Room</a>
-                                </div>
                             </div>
                         </div>
                         <div class="col-12">

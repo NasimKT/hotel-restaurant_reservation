@@ -27,6 +27,29 @@
 
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
     <style>
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fefefe;
+            padding: 20px;
+            border: 1px solid #888;
+            z-index: 1000;
+        }
+
+        .popup-content {
+            text-align: center;
+        }
+
+        .close {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
         .spacer {
             height: 50px;
             /* Adjust height as needed */
@@ -89,11 +112,8 @@
                                 <nav>
                                     <ul id="navigation">
                                         <li><a href="index.php">home</a></li>
-                                        <li><a class="active" href="rooms.php">Restaurant</a></li>
-                                        <li><a href="about.html">About</a></li>
-                                        <li><a href="blog.php">Hotel </i></a>
-
-                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a class="active" href="rooms.php">Hotel</a></li>
+                                        <li><a href="table.php">Restaurant</i></a>
                                     </ul>
                                 </nav>
                             </div>
@@ -108,27 +128,8 @@
                         </div>
                         <div class="col-xl-5 col-lg-4 d-none d-lg-block">
                             <div class="book_room">
-                                <div class="socail_links">
-                                    <ul>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-facebook-square"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-twitter"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-instagram"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
                                 <div class="book_btn d-none d-lg-block">
-                                    <a class="popup-with-form" href="#test-form">Book A Room</a>
+                                    <a href="./hotelbooking/hotel.php"> Hotel Room</a>
                                 </div>
                             </div>
                         </div>
@@ -144,7 +145,7 @@
 
     <!-- bradcam_area_start -->
     <div class="bradcam_area breadcam_bg_1">
-        <h3>Luxurious Rooms</h3>
+        <h3>Luxurious Restaurant</h3>
     </div>
     <!-- bradcam_area_end -->
 
@@ -152,15 +153,6 @@
     <div class="spacer"></div>
 
     <!-- Container for image and content -->
-    <div class="container">
-        <div class="image">
-            <img src="img/rooms/1.png" alt="Room Image" style="width: 100%; height: 100%;">
-        </div>
-        <div class="content">
-            <h2>Content Title</h2>
-            <p>This is the content that will be displayed on the right side of the image. You can add more text, images, or any other HTML elements here.</p>
-        </div>
-    </div>
     <?php
     include("db.php");
     $query = "SELECT * FROM hotel where verified = 1";
@@ -175,6 +167,17 @@
                 <div class="content">
                     <h2>' . $row['name'] . '</h2>
                     <p>' . $row['about'] . '</p>
+                    <button class="btn btn-primary" id="openPopup">Details</button>
+                </div>
+            </div>
+            <div id="popup" class="popup">
+                <div class="popup-content">
+                    <span class="close btn-close">&times;</span>
+                    <h2 class="modal-title">' . $row['name'] . '</h2>
+                    <div class="modal-body">
+                    <p>' . $row['about'] . '</p>
+                    <p>Food Facility:' . ($row["verified"] ? "Available" : "Not Available") . '</p>
+                    </div>
                 </div>
             </div>
         ';
@@ -194,6 +197,19 @@
 
 
     <!-- JS here -->
+    <script>
+        document.getElementById("openPopup").addEventListener("click", function() {
+            document.getElementById("popup").style.display = "block";
+        });
+
+        document.querySelector(".close").addEventListener("click", function() {
+            document.getElementById("popup").style.display = "none";
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <script src="js/vendor/modernizr-3.5.0.min.js"></script>
     <script src="js/vendor/jquery-1.12.4.min.js"></script>
     <script src="js/popper.min.js"></script>
@@ -234,6 +250,10 @@
                 rightIcon: '<span class="fa fa-caret-down"></span>'
             }
 
+        });
+        let book =document.getElementById('hotelbook');
+        book.addEventListener('click',function(){
+            window.location.href('./hotelbooking/hotel.php');
         });
     </script>
 

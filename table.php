@@ -27,49 +27,72 @@
 
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
     <style>
-    .spacer {
-        height: 50px;
-        /* Adjust height as needed */
-    }
-
-    .container {
-        display: flex;
-        flex-direction: row;
-        animation: slideIn 1s ease-in-out;
-        /* Animation for the image */
-        transition: transform 0.3s ease-in-out;
-        /* Transition for the hover effect */
-    }
-
-    .image {
-        flex: 0 0 auto;
-        width: 200px;
-        /* Adjust the width of the image as needed */
-
-    }
-
-    .container:hover {
-        transform: scale(1.1);
-        /* Increase the size of the image on hover */
-    }
-
-    .content {
-        flex: 1;
-        padding-left: 20px;
-        /* Adjust spacing between image and content */
-    }
-
-    @keyframes slideIn {
-        from {
-            transform: translateX(-100%);
-            opacity: 0;
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fefefe;
+            padding: 20px;
+            border: 1px solid #888;
+            z-index: 1000;
         }
 
-        to {
-            transform: translateX(0);
-            opacity: 1;
+        .popup-content {
+            text-align: center;
         }
-    }
+
+        .close {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .spacer {
+            height: 50px;
+            /* Adjust height as needed */
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            animation: slideIn 1s ease-in-out;
+            /* Animation for the image */
+            transition: transform 0.3s ease-in-out;
+            /* Transition for the hover effect */
+        }
+
+        .image {
+            flex: 0 0 auto;
+            width: 200px;
+            /* Adjust the width of the image as needed */
+
+        }
+
+        .container:hover {
+            transform: scale(1.1);
+            /* Increase the size of the image on hover */
+        }
+
+        .content {
+            flex: 1;
+            padding-left: 20px;
+            /* Adjust spacing between image and content */
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 
@@ -88,12 +111,9 @@
                             <div class="main-menu  d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a href="index.php">Home</a></li>
-                                        <li><a href="rooms.php">Restaurant</li></a>
-                                        <li><a href="about.html">About</a></li>
-                                        <li><a class="active" href="blog.php">Hotel</i></a>
-
-                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="index.php">home</a></li>
+                                        <li><a class="active" href="table.php">Restaurant</a></li>
+                                        <li><a href="rooms.php">Hotel </i></a>
                                     </ul>
                                 </nav>
                             </div>
@@ -101,35 +121,15 @@
                         <div class="col-xl-2 col-lg-2">
                             <div class="logo-img">
                                 <a href="index.php">
-                                    <img src="img/360_F_568383056_PDGaD3j4QFS0OYuFocHb0tdHwNe2jhrJ-removebg-preview.png"
-                                        alt="" style="width: 100px; height: auto;">
+                                    <img src="img/360_F_568383056_PDGaD3j4QFS0OYuFocHb0tdHwNe2jhrJ-removebg-preview.png" alt="" style="width: 100px; height: auto;">
 
                                 </a>
                             </div>
                         </div>
                         <div class="col-xl-5 col-lg-4 d-none d-lg-block">
                             <div class="book_room">
-                                <div class="socail_links">
-                                    <ul>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-facebook-square"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-twitter"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-instagram"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
                                 <div class="book_btn d-none d-lg-block">
-                                    <a class="popup-with-form" href="#test-form">Book A Room</a>
+                                    <a href="restaurantbooking/restaurant.php">Book Restaurant Table</a>
                                 </div>
                             </div>
                         </div>
@@ -153,16 +153,6 @@
     <div class="spacer"></div>
 
     <!-- Container for image and content -->
-    <div class="container data">
-        <div class="image">
-            <img src="img/rooms/1.png" alt="Room Image" style="width: 100%; height: 100%;">
-        </div>
-        <div class="content">
-            <h2>Content Title</h2>
-            <p>This is the content that will be displayed on the right side of the image. You can add more text, images,
-                or any other HTML elements here.</p>
-        </div>
-    </div>
     <?php
     include("db.php");
     $query = "SELECT * FROM restaurant where verified = 1";
@@ -177,6 +167,17 @@
                 <div class="content">
                     <h2>' . $row['name'] . '</h2>
                     <p>' . $row['about'] . '</p>
+                    <button class="btn btn-primary" id="openPopup">Details</button>
+                </div>
+            </div>
+            <div id="popup" class="popup">
+                <div class="popup-content">
+                    <span class="close btn-close">&times;</span>
+                    <h2 class="modal-title">' . $row['name'] . '</h2>
+                    <div class="modal-body">
+                    <p>' . $row['about'] . '</p>
+                    <p>Food Items:' . $row["menu"] . '</p>
+                    </div>
                 </div>
             </div>
         ';
@@ -185,6 +186,7 @@
         echo 'Failed to fetch options from the database.';
     }
     ?>
+
     <!-- offers_area_end -->
 
     <!-- features_room_startt -->
@@ -195,6 +197,19 @@
 
 
     <!-- JS here -->
+    <script>
+        document.getElementById("openPopup").addEventListener("click", function() {
+            document.getElementById("popup").style.display = "block";
+        });
+
+        document.querySelector(".close").addEventListener("click", function() {
+            document.getElementById("popup").style.display = "none";
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <script src="js/vendor/modernizr-3.5.0.min.js"></script>
     <script src="js/vendor/jquery-1.12.4.min.js"></script>
     <script src="js/popper.min.js"></script>
@@ -223,19 +238,19 @@
 
     <script src="js/main.js"></script>
     <script>
-    $('#datepicker').datepicker({
-        iconsLibrary: 'fontawesome',
-        icons: {
-            rightIcon: '<span class="fa fa-caret-down"></span>'
-        }
-    });
-    $('#datepicker2').datepicker({
-        iconsLibrary: 'fontawesome',
-        icons: {
-            rightIcon: '<span class="fa fa-caret-down"></span>'
-        }
+        $('#datepicker').datepicker({
+            iconsLibrary: 'fontawesome',
+            icons: {
+                rightIcon: '<span class="fa fa-caret-down"></span>'
+            }
+        });
+        $('#datepicker2').datepicker({
+            iconsLibrary: 'fontawesome',
+            icons: {
+                rightIcon: '<span class="fa fa-caret-down"></span>'
+            }
 
-    });
+        });
     </script>
 
 

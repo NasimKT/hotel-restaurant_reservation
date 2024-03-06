@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         countdown--;
                         setTimeout(updateCountdown, 1000);
                     } else {
-                        window.location.href = 'signin.php'; 
+                        window.location.href = 'sign.php'; 
                     }
                 }
     

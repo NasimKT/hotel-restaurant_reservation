@@ -46,7 +46,7 @@
                                             <li><a href="index.php">Home</a></li>
                                             <li><a href="rooms.php">Restaurant</li></a>
                                             <li><a class="active" href="about.html">About</a></li>
-                                            <li><a  href="blog.php">Hotel</i></a>
+                                            <li><a  href="table.php">Hotel</i></a>
     
                                             <li><a href="contact.html">Contact</a></li>
                                       
